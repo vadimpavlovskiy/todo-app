@@ -1,0 +1,23 @@
+$componentcolor: #B1009B;
+
+.todo_comp{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: $componentcolor;
+    height: 50px;
+    margin: 15px 0 15px 0;
+    border-radius: 10px;
+    box-shadow: 5px 10px hsla(0, 0%, 0%, 0.308);
+}
+span{
+    margin-right: 50px;
+}
+svg{
+    padding-left: 10px;
+}

@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import TodoSearch from './components/todo-search.component';
+import TodoList from './components/todo-list.component';
+
+class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      tasks:[]
+    }
+  }
+   
+  handleChange = (data) => {
+      this.setState({tasks: [...this.state.tasks, ({isImported: false, task: data})]}) // Insert new value in state
+  }
+  delateHandler = (text) => {
+    this.setState(prevState => ({ tasks: prevState.tasks.filter(task => {
+        return task.task !== text;
+    })}))
+  } 
+      
+
+  render (){
+    return(
+      <div className='container'>
+        <div className='content'>
+          <TodoSearch onChange = {this.handleChange} />
+          <TodoList delete={this.delateHandler}  tasks={this.state.tasks}/>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default App;

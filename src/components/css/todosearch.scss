@@ -1,0 +1,39 @@
+$bgcolor: #5E0DAC;
+$componentcolor: #B1009B	;
+$buttoncolor: #2E16B1;
+
+.todo_header{
+    margin: 50px 0 50px 0;
+}
+.todo_search{
+    display: flex;
+    flex-direction: column;
+}
+.search{
+    padding-left: 5%;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: $componentcolor;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 10px hsla(0, 0%, 0%, 0.308);
+}
+.search_button{  
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: $buttoncolor;
+    box-shadow: 5px 10px 2px 1px hsla(0, 0%, 0%, 0.308);
+}
+.search_button:hover{  
+    background-color: hsl(249, 86%, 31%);
+}
+.search_button:active{  
+    background-color: rgb(45, 16, 207);
+    box-shadow: none;
+}
