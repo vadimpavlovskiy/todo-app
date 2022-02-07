@@ -13,7 +13,7 @@ class TodoList extends React.Component{
                 {this.props.tasks.map((item,index)=> {
                     return(
                                 <div className="todo_comp" key={index}>
-                                   <ToDoCard delete={this.props.delete} text={item.task} priority={item.isImported}/>
+                                   <ToDoCard prior={this.props.prior} delete={this.props.delete} text={item.task} id={item.id}priority={item.isImported}/>
                                 </div>
                     )
             })} 

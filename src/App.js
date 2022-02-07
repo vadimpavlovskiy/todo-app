@@ -13,21 +13,32 @@ class App extends React.Component {
   }
    
   handleChange = (data) => {
-      this.setState({tasks: [...this.state.tasks, ({isImported: false, task: data})]}) // Insert new value in state
+      this.setState({tasks: [...this.state.tasks, ({isImported: false, task: data, id: Math.floor(Math.random()*1000)})]}) // Insert new value in state
   }
-  delateHandler = (text) => {
+  delateHandler = (id) => {
     this.setState(prevState => ({ tasks: prevState.tasks.filter(task => {
-        return task.task !== text;
+        return task.id !== id;
     })}))
   } 
-      
+  priorityHandler = (id) => { // Success work!
+    this.setState ({tasks: this.state.tasks.map((item) => {
+      if(item.id === id){
+       const sortedItem = {
+         ...item,
+         isImported: !item.isImported
+       }
+       return sortedItem;
+      }
+      return item;
+    })})
+  }
 
   render (){
     return(
       <div className='container'>
         <div className='content'>
           <TodoSearch onChange = {this.handleChange} />
-          <TodoList delete={this.delateHandler}  tasks={this.state.tasks}/>
+          <TodoList prior={this.priorityHandler} delete={this.delateHandler}  tasks={this.state.tasks}/>
         </div>
       </div>
     )
