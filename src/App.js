@@ -20,18 +20,22 @@ class App extends React.Component {
         return task.id !== id;
     })}))
   } 
-  priorityHandler = (id) => { // Success work!
-    this.setState ({tasks: this.state.tasks.map((item) => {
+  priorityHandler = async (id) => {
+    let priorityItem = {tasks: this.state.tasks.map((item) => {
       if(item.id === id){
-       const sortedItem = {
+       const changePrior = {
          ...item,
          isImported: !item.isImported
        }
-       return sortedItem;
+       return changePrior
       }
       return item;
-    })})
+    })
+    // Change isImported here
   }
+    this.setState({tasks: priorityItem.tasks.sort((a,b) => a.isImported > b.isImported ? -1 : 1)})
+    // Sort then true is go up
+}
 
   render (){
     return(
