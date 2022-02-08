@@ -16,13 +16,26 @@ const outerTheme = createTheme({
 
 
 export default class ToDoCard extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isEditing: false
+        }
+    }
+
+    handleDoubleClick = () => {
+        this.setState({isEditing: true})
+    }
+
     IconChange = (props) => {
         if(this.props.priority ){
-           return <StarIcon onClick={this.prioritySubmit} fontSize="small"/>
+           return <StarIcon theme={outerTheme.primary} onClick={this.prioritySubmit} fontSize="small"/>
         } else {
             return <StarBorderIcon  onClick={this.prioritySubmit} fontSize="small"/>
         }
     }
+
+
 
     deleteSubmit = () => {
         this.props.delete(this.props.id)
@@ -30,17 +43,25 @@ export default class ToDoCard extends React.Component {
     prioritySubmit = () => {
         this.props.prior(this.props.id)
     }
+
+    editSubmit = (e) => {
+        // this.props.edit(this.props.text)
+       this.props.edit(this.props.id, e)
+    }
     render()
-    
     {
         return(
-            <div>
                 <ThemeProvider theme={outerTheme}>
-                    <span>{this.props.text}</span>
+                    {this.state.isEditing ? (
+                        <input className="input_editing" autoFocus value={this.props.text} onChange={e => this.editSubmit(e.target.value)} onKeyPress={(e)=> {if(e.key==="Enter"){this.setState({isEditing: false})}}} type="text"/>
+                    ): (
+                        <div onDoubleClick={this.handleDoubleClick} className="text">{this.props.text}</div>
+                        )}
+                    <div className="icons">
                     <this.IconChange /> {/* Change icon depends from priority */}
-                    <DeleteIcon onClick={this.deleteSubmit} theme={outerTheme} fontSize="small"/>
+                    <DeleteIcon onClick={this.deleteSubmit} theme={outerTheme.main} fontSize="small"/>
+                    </div>
                 </ThemeProvider>
-            </div>
         )
     }
 }

@@ -37,12 +37,26 @@ class App extends React.Component {
     // Sort then true is go up
 }
 
+doubleHandler = async(id,text) => {
+  let editibleItem = {tasks: this.state.tasks.map((item) => {
+    if(item.id === id){
+      const changeItem = {
+        ...item,
+        task: text
+      }
+      return changeItem;
+    }
+   return item;
+  })}
+  this.setState({tasks: editibleItem.tasks.sort((a,b) => a.isImported > b.isImported ? -1 : 1)})
+}
+
   render (){
     return(
       <div className='container'>
         <div className='content'>
           <TodoSearch onChange = {this.handleChange} />
-          <TodoList prior={this.priorityHandler} delete={this.delateHandler}  tasks={this.state.tasks}/>
+          <TodoList edit={this.doubleHandler} prior={this.priorityHandler} delete={this.delateHandler}  tasks={this.state.tasks}/>
         </div>
       </div>
     )

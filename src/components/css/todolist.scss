@@ -1,9 +1,13 @@
 $componentcolor: #B1009B;
 
 .todo_comp{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-areas: 
+    "a b";
     align-items: center;
     justify-content: space-between;
+    justify-items: center;
     padding-left: 5%;
     padding-right: 5%;
     color: white;
@@ -15,9 +19,30 @@ $componentcolor: #B1009B;
     border-radius: 10px;
     box-shadow: 5px 10px hsla(0, 0%, 0%, 0.308);
 }
-span{
+.text{
+    grid-area: a;
     margin-right: 50px;
 }
-svg{
+.icons{
+    grid-area: b;
     padding-left: 10px;
+}
+.input_editing{
+    padding-left: 5%;
+    padding-top: 5%;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;;
+    background-color: #55004b;
+    border-radius: 10px;
+}
+.input_editing:focus{
+    padding-left: 5%;
+    padding-top: 5%;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;;
+    background-color: #55004b;
+    box-shadow: 3px 5px #00000046;
+    border-radius: 10px;
 }
