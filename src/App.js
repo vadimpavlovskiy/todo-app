@@ -11,11 +11,23 @@ class App extends React.Component {
       tasks:[]
     }
   }
-   
-  handleChange = (data) => {
-      this.setState({tasks: [...this.state.tasks, ({isImported: false, task: data, id: Math.floor(Math.random()*1000)})]}) // Insert new value in state
+  doneHandler = async (id) => {
+    let doneItem = {tasks: this.state.tasks.map((item)=> {
+      if(item.id === id ){
+        const changeCompleted = {
+          ...item,
+          isCompleted: !item.isCompleted
+        }
+        return changeCompleted
+      }
+      return  item
+    })}
+    this.setState({tasks: doneItem.tasks.sort((a,b)=> a.isImported > b.isImported ? -1 : 1)})
   }
-  delateHandler = (id) => {
+  handleChange = async (data) => {
+      this.setState({tasks: [...this.state.tasks, ({isImported: false, isCompleted: false, task: data, id: Math.floor(Math.random()*1000)})]}) // Insert new value in state
+  }
+  delateHandler = async (id) => {
     this.setState(prevState => ({ tasks: prevState.tasks.filter(task => {
         return task.id !== id;
     })}))
@@ -56,7 +68,7 @@ doubleHandler = async(id,text) => {
       <div className='container'>
         <div className='content'>
           <TodoSearch onChange = {this.handleChange} />
-          <TodoList edit={this.doubleHandler} prior={this.priorityHandler} delete={this.delateHandler}  tasks={this.state.tasks}/>
+          <TodoList edit={this.doubleHandler} done={this.doneHandler} prior={this.priorityHandler} delete={this.delateHandler}  tasks={this.state.tasks}/>
         </div>
       </div>
     )

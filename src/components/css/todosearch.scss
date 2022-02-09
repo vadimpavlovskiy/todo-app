@@ -37,3 +37,10 @@ $buttoncolor: #2E16B1;
     background-color: rgb(45, 16, 207);
     box-shadow: none;
 }
+@media (min-width: 240px) and (max-width: 425px){
+    .todo_header {
+        h1{
+            font-size: 16px;
+        }
+    }
+}

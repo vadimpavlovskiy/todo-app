@@ -1,7 +1,10 @@
 import React from "react";
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import './css/todolist.scss'
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -19,7 +22,7 @@ export default class ToDoCard extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isEditing: false
+            isEditing: false,
         }
     }
 
@@ -31,17 +34,26 @@ export default class ToDoCard extends React.Component {
         if(this.props.priority ){
            return <StarIcon theme={outerTheme.primary} onClick={this.prioritySubmit} fontSize="small"/>
         } else {
-            return <StarBorderIcon  onClick={this.prioritySubmit} fontSize="small"/>
+            return <StarBorderIcon theme={outerTheme.primary} onClick={this.prioritySubmit} fontSize="small"/>
         }
     }
 
-
+    CompleteChange = (props) => {
+        if(this.props.completed){
+            return <CheckCircleIcon onClick={this.doneSubmit} theme={outerTheme.primary}  fontSize="small" />
+        } else{
+            return <CheckCircleOutlineIcon onClick={this.doneSubmit} theme={outerTheme.primary}  fontSize="small" />
+        }
+    }
 
     deleteSubmit = () => {
         this.props.delete(this.props.id)
     }
     prioritySubmit = () => {
         this.props.prior(this.props.id)
+    }
+    doneSubmit = () => {
+        this.props.done(this.props.id);
     }
 
     editSubmit = (e) => {
@@ -55,9 +67,10 @@ export default class ToDoCard extends React.Component {
                     {this.state.isEditing ? (
                         <input className="input_editing" autoFocus value={this.props.text} onChange={e => this.editSubmit(e.target.value)} onKeyPress={(e)=> {if(e.key==="Enter"){this.setState({isEditing: false})}}} type="text"/>
                     ): (
-                        <div onDoubleClick={this.handleDoubleClick} className="text">{this.props.text}</div>
+                        <div onDoubleClick={this.handleDoubleClick} className={this.props.completed ? "icon_done" : "text"}>{this.props.text}</div>
                         )}
                     <div className="icons">
+                    <this.CompleteChange/>
                     <this.IconChange /> {/* Change icon depends from priority */}
                     <DeleteIcon onClick={this.deleteSubmit} theme={outerTheme.main} fontSize="small"/>
                     </div>

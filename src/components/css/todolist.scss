@@ -46,3 +46,8 @@ $componentcolor: #B1009B;
     box-shadow: 3px 5px #00000046;
     border-radius: 10px;
 }
+.icon_done{
+    grid-area: a;
+    margin-right: 50px;
+    text-decoration: line-through;
+}
